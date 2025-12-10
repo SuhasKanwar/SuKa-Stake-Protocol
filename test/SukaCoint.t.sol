@@ -6,6 +6,7 @@ import "src/SukaCoin.sol";
 
 contract SuKaCoinTest is Test {
     SuKaCoinContract sukaCoin;
+    address prankAddress = 0xa3d05E72052a89b985542100BcB93b93FC1aA909;
 
     function setUp() public {
         sukaCoin = new SuKaCoinContract(address(this));
@@ -16,20 +17,20 @@ contract SuKaCoinTest is Test {
     }
 
     function testRevert_Mint() public {
-        vm.startPrank(0xa3d05E72052a89b985542100BcB93b93FC1aA909);
+        vm.startPrank(prankAddress);
         vm.expectRevert();
-        sukaCoin.mint(0xa3d05E72052a89b985542100BcB93b93FC1aA909, 10);
+        sukaCoin.mint(prankAddress, 10);
     }
 
     function testMint() public {
-        sukaCoin.mint(0xa3d05E72052a89b985542100BcB93b93FC1aA909, 10);
-        assert(sukaCoin.balanceOf(0xa3d05E72052a89b985542100BcB93b93FC1aA909) == 10);
+        sukaCoin.mint(prankAddress, 10);
+        assert(sukaCoin.balanceOf(prankAddress) == 10);
     }
 
     function testChangeStakingContract() public {
-        sukaCoin.updateStakingContract(0xa3d05E72052a89b985542100BcB93b93FC1aA909);
-        vm.startPrank(0xa3d05E72052a89b985542100BcB93b93FC1aA909);
-        sukaCoin.mint(0xa3d05E72052a89b985542100BcB93b93FC1aA909, 10);
-        assert(sukaCoin.balanceOf(0xa3d05E72052a89b985542100BcB93b93FC1aA909) == 10);
+        sukaCoin.updateStakingContract(prankAddress);
+        vm.startPrank(prankAddress);
+        sukaCoin.mint(prankAddress, 10);
+        assert(sukaCoin.balanceOf(prankAddress) == 10);
     }
 }

@@ -18,6 +18,10 @@ contract StakingContract {
         stakes[msg.sender] -= _amount;
     }
 
+    function balanceOf(address _staker) public view returns (uint256) {
+        return stakes[_staker];
+    }
+
     function getRewards() public view {}
 
     function claimRewards() public {}
