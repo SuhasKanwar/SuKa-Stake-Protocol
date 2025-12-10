@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
-import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import { Ownable }  from "@openzeppelin/contracts/access/Ownable.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SuKaCoinContract is ERC20, Ownable {
     address public stakingContract;
@@ -11,7 +11,7 @@ contract SuKaCoinContract is ERC20, Ownable {
         stakingContract = _stakingContract;
     }
 
-    modifier onlyStakingContract {
+    modifier onlyStakingContract() {
         require(msg.sender == stakingContract, "Only the staking contract can envoke this function");
         _;
     }
@@ -21,7 +21,6 @@ contract SuKaCoinContract is ERC20, Ownable {
     }
 
     function mint(address _account, uint256 _amount) public onlyStakingContract {
-        
         _mint(_account, _amount);
     }
 }
