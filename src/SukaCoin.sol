@@ -12,8 +12,12 @@ contract SuKaCoinContract is ERC20, Ownable {
     }
 
     modifier onlyStakingContract() {
-        require(msg.sender == stakingContract, "Only the staking contract can envoke this function");
+        _onlyStakingContract();
         _;
+    }
+
+    function _onlyStakingContract() internal view {
+        require(msg.sender == stakingContract, "Only the staking contract can envoke this function");
     }
 
     function updateStakingContract(address _stakingContract) public onlyOwner {

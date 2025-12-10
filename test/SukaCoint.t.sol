@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.13;
 
-import "forge-std/Test.sol";
-import "src/SukaCoin.sol";
+import {Test} from "forge-std/Test.sol";
+import {SuKaCoinContract} from "src/SuKaCoin.sol";
 
 contract SuKaCoinTest is Test {
     SuKaCoinContract sukaCoin;
