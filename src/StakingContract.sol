@@ -76,7 +76,7 @@ contract StakingContract {
         user.rewardDebt = 0;
     }
 
-    function getRewards(address _address) public view {
+    function getRewards(address _address) public view returns (uint256) {
         uint256 timeDiff = block.timestamp - userInfo[_address].lastUpdateTime;
 
         if (timeDiff == 0) {

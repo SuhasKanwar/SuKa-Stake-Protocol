@@ -17,20 +17,23 @@ contract SuKaCoinTest is Test {
     }
 
     function testRevert_Mint() public {
+        uint256 value = 10;
         vm.startPrank(prankAddress);
         vm.expectRevert();
-        sukaCoin.mint(prankAddress, 10);
+        sukaCoin.mint(address(this), value);
     }
 
     function testMint() public {
-        sukaCoin.mint(prankAddress, 10);
-        assert(sukaCoin.balanceOf(prankAddress) == 10);
+        uint256 value = 10;
+        sukaCoin.mint(address(this), value);
+        assert(sukaCoin.balanceOf(address(this)) == value);
     }
 
     function testChangeStakingContract() public {
+        uint256 value = 10;
         sukaCoin.updateStakingContract(prankAddress);
         vm.startPrank(prankAddress);
-        sukaCoin.mint(prankAddress, 10);
-        assert(sukaCoin.balanceOf(prankAddress) == 10);
+        sukaCoin.mint(prankAddress, value);
+        assert(sukaCoin.balanceOf(prankAddress) == value);
     }
 }
